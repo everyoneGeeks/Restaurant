@@ -20,7 +20,7 @@ class food extends JsonResource
             "image"=>$this->image,
             'description'=>$this->description,
             "price"=>$this->price,
-            "is_discount"=>$this->discount,
+            "is_discount"=>$this->is_discount,
             "discount"=>$this->discount,
         ];
     }

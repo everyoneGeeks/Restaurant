@@ -20,3 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('login','Api\loginController@login');
 Route::post('table','Api\TableController@Tables');
 Route::post('home','Api\HomeController@Home');
+Route::post('food','Api\foodsController@food');
+Route::post('offers','Api\OffersController@offers');
