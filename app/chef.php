@@ -2,10 +2,13 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class chef extends Model
+class chef extends Authenticatable
 {
+    use Notifiable;
     public $table="chefs";
 
 /*
@@ -16,4 +19,6 @@ class chef extends Model
 public function category(){
     return $this->belongsToMany('App\categories','categories_chefs','chef_id','category_id');
 }
+
+
 }
