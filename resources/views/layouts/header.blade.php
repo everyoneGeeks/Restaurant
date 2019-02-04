@@ -11,7 +11,7 @@
       <div class="container-fluid">
         <!-- begin mobile sidebar expand / collapse button -->
         <div class="navbar-header">
-          <a href="index.html" class="navbar-brand"><span class="navbar-logo"></span>مكتبة الطالب </a>
+          <a href="index.html" class="navbar-brand"><span class="navbar-logo"></span> the Restaurant </a>
           <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -24,7 +24,7 @@
         <ul class="nav navbar-nav navbar-left">
           <li class="dropdown navbar-user">
             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="public/assets/img/user-13.jpg" alt="" /> 
+              <img src="/Images/admin.png" alt="" /> 
               <span class="hidden-xs">@yield('user')</span> <b class="caret"></b>
             </a>
             @if(Auth::check())

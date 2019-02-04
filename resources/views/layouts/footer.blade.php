@@ -6,6 +6,6 @@
 
 <!-- begin #footer -->
 <div id="footer" class="footer">
-مكتبة الطالب  &copy; <?php echo date('Y'); ?>
+Click To pass &copy; <?php echo date('Y'); ?>
 </div>
 <!-- end #footer -->

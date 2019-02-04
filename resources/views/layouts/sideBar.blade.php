@@ -7,11 +7,11 @@
       <li class="nav-profile">
         <div class="image">
           <a href="javascript:;">
-            <img src="public/assets/img/user-13.jpg" alt="" />
+            <img src="/Images/admin.png" alt="" />
           </a>
         </div>
         <div class="info">
-          stdslibrary
+          the Restaurant
           <small>{{ Auth::user()->name }}</small>
         </div>
       </li>
@@ -20,77 +20,27 @@
     <!-- begin sidebar nav -->
     <ul class="nav">
 
-      <li class="{{ Request::is(Route::current()->getName() == 'home') ? 'active' : '' }}">
-        <a href="/home">
-          <i class="fa fa-dashboard"></i>
-          <span>الرئيسية</span>
+
+      <li class="{{ Request::is('/user/table*') ? 'active ' : '' }}">
+      <a href="{{route('tables')}}">
+          <i class="fas fa-utensils"></i>
+          <span>الطاولات </span>
         </a>
       </li>
 
-      <li class="{{ Request::is('users*') ? 'active ' : '' }}">
-        <a href="/users">
-          <i class="fa fa-users"></i>
-          <span>المستخدمون</span>
-        </a>
-      </li>
-
-      <li class="{{ Request::is('product*') ? 'active ' : '' }}">
-        <a href="/product">
-          <i class="glyphicon glyphicon-gift"></i>
-          <span>المنتجات </span>
-        </a>
-      </li>
-
-      <li class="{{ Request::is('orders*') ? 'active ' : '' }}">
-        <a href="/orders">
-          <i class="glyphicon glyphicon-calendar"></i>
-          <span>الطلبات </span>
-        </a>
-      </li>
-
-      </li>
-      <li class="{{ Request::is('advertisements*') ? 'active ' : '' }}">
-        <a href="/advertisements">
-          <i class="fa fa-address-book"></i>
-          <span>الاعلانات</span>
-        </a>
-      </li>
-     
-
-      <li class="{{ Request::is('brand*') ? 'active ' : '' }}">
-        <a href="/brand">
-          <i class="fa fa-address-book"></i>
-          <span>العلامات التجارية </span>
-        </a>
-      </li>
-
-      <li class="{{ Request::is('color*') ? 'active ' : '' }}">
-        <a href="/color">
-          <i class="fa fa-address-book"></i>
-          <span>الالوان </span>
-        </a>
-      </li>
-
-      <li class="{{ Request::is('policy*') ? 'active ' : '' }}">
-        <a href="/policy">
-          <i class="fa fa-file-text-o"></i>
-          <span>سياسة التطبيق</span>
-        </a>
-      </li>
-
-      <li class="{{ Request::is('about*') ? 'active ' : '' }}">
-        <a href="/about">
-          <i class="fa fa-file-text-o"></i>
-          <span>عن الموقع</span>
-        </a>
-      </li>
-
-      <li class="{{ Request::is('contact*') ? 'active ' : '' }}">
-        <a href="/contact">
-          <i class="fa fa-phone"></i>
-          <span>تواصل معنا</span>
-        </a>
-      </li>
+      <li class="{{ Request::is('/user/category*') ? 'active ' : '' }}">
+        <a href="{{route('categories')}}">
+            <i class="fas fa-utensils"></i>
+            <span>الاقسام </span>
+          </a>
+        </li>  
+        
+        <li class="{{ Request::is('/user/food*') ? 'active ' : '' }}">
+          <a href="{{route('foods')}}">
+              <i class="fas fa-utensils"></i>
+              <span>الاطعمة  </span>
+            </a>
+          </li>  
 
       <!-- begin sidebar minify button -->
       <li>
