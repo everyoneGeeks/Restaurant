@@ -43,7 +43,8 @@ public function foods(Request $request)
 public function create_food()
 {
     $foods=foods::get();
-    $Categories=categories::get();
+    $Categories=categories_chef::with('category')->where('chef_id',auth()->user()->id)->get();
+
     return view('chef.Foods.create',compact('foods','Categories'));
 }
 
@@ -74,7 +75,7 @@ public function save_food(Request $request)
             $destinationPath = public_path('foods/');
             $image->move($destinationPath, $name);
 
-    $categories=foods::insert(['name'=>$request->name,'image'=>"foods/".$name,
+    $categories=foods::insert(['name'=>$request->name,'image'=>env('APP_URL').'/'."foods/".$name,
         'description'=>$request->description,'price'=>$request->price,
         'category_id'=>$request->category,'chef_id'=>auth()->user()->id,'discount'=>$request->discount,'is_discount'=>$is_discount]);
 
@@ -104,7 +105,6 @@ public function update_food(Request $request,$id)
     $rules = [
         "category"   =>"required|exists:categories,id",  
         'name'       =>"required",
-        "image"      =>"required",
         "description" =>'required',
         "price"       =>'required',
         "discount"    =>"required"
@@ -114,16 +114,21 @@ public function update_food(Request $request,$id)
         }else{
             $is_discount=0;
         }
+
         if($request->has('image')){
             $image = $request->image;
             $name = time().'.'.$image->getClientOriginalExtension();
-            $destinationPath = public_path('public/users_images/');
+            $destinationPath = public_path('foods/');
             $image->move($destinationPath, $name);
+            $fullImageUrl=env('APP_URL').'/'."foods/".$name;
+        }else{
+            $fullImageUrl=foods::where('id',$id)->frist()->image;
         }
+
     $this->validate($request,$rules);
 
-    $categories=foods::update([
-    'name'=>$request->name,'image'=>"users_images/".$name,
+    $categories=foods::where('id',$id)->update([
+    'name'=>$request->name,'image'=>$fullImageUrl,
     'description'=>$request->description,'price'=>$request->price,
     'category_id'=>$request->category,'chef_id'=>auth()->user()->id,
     'discount'=>$request->discount,'is_discount'=>$is_discount]);

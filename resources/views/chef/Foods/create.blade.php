@@ -69,8 +69,9 @@
                                 <div class="form-group {{ $errors->has('category') ? ' has-error' : '' }}">
                                         <label for="category">الاقسام المتاحة  </label>
                                         <select class="form-control js-example-basic-single" name="category">
+                                           
                                                 @foreach($Categories as $category)    
-                                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                     <option value="{{ $category->category->id }}">{{ $category->category->name }}</option>
                                                      @endforeach
                                                    </select>
                                         @if ($errors->has('category'))

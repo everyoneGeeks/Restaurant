@@ -12,7 +12,7 @@
         </div>
         <div class="info">
           the Restaurant
-          <small>{{ Auth::user()->name }}</small>
+          <small>{{ Auth::guard('chef')->user()->name }}</small>
         </div>
       </li>
     </ul>
@@ -23,14 +23,14 @@
 
       <li class="{{ Request::is('/user/table*') ? 'active ' : '' }}">
       <a href="{{route('tables')}}">
-          <i class="fas fa-utensils"></i>
-          <span>الطاولات </span>
+          <i class="fas fa-table"></i>
+                    <span>الطاولات </span>
         </a>
       </li>
 
       <li class="{{ Request::is('/user/category*') ? 'active ' : '' }}">
         <a href="{{route('categories')}}">
-            <i class="fas fa-utensils"></i>
+            <i class="fas fa-list-alt"></i>
             <span>الاقسام </span>
           </a>
         </li>  

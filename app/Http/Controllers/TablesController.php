@@ -31,7 +31,7 @@ class TablesController extends Controller
  */
 public function table(Request $request)
 {
-   $tables=tables::where('chef_id',\Auth::user()->id)->get();
+   $tables=tables::where('chef_id',\Auth::guard('chef')->user()->id)->get();
     return view('chef.Tables.index',compact('tables'));
 }
 

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 class AdminLoginController extends Controller
 {
-
+    protected $redirectTo = '/user/table/list';
 
 /**
  * @return Loginform view to chef 
@@ -24,7 +24,7 @@ public function login(Request $request)
 {
     // dd($request->email);
     if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
-        return redirect()->intended('dashboard');
+        return redirect()->intended('tables');
     }else{
         return back()->with("status", "email or password is not correct");
     }

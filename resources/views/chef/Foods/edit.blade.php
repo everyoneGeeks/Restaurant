@@ -38,7 +38,7 @@
                             <img src="{{$foods->image}}">
                         <div class="form-group {{ $errors->has('image') ? ' has-error' : '' }}">
                                 <label for="image">الصورة</label>
-                        <input type="file" name="image" class="form-control"  value="{{$foods->image}}">
+                        <input type="file" name="image" class="form-control"  value="">
                                 @if ($errors->has('image'))
                                 <span style="color:red;">{{ $errors->first('image') }}</span>
                                 @endif

@@ -21,8 +21,8 @@ public function showLoginForm()
  */
 public function login(Request $request)
 {
-    if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
-        return redirect()->intended(route('user.dashboard'));
+    if (Auth::guard('chef')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
+        return redirect()->intended(route('tables'));
     }else{
         return back()->with("status", "email or password is not correct");
 
