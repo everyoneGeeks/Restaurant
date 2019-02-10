@@ -13,7 +13,7 @@ use App\chef;
 | this api will get all Gategories and foods
 |
 */
-/*   
+/**
  _    _                      
 | |  | |                     
 | |__| | ___  _ __ ___   ___ 
