@@ -55,7 +55,7 @@ public function save_table(Request $request)
         ];  
 
     $this->validate($request,$rules);
-        $table=tables::insert(['chef_id'=>auth()->user()->id,'number'=>$request->number]);
+        $table=tables::insert(['chef_id'=>auth()->guard('chef')->user()->id,'number'=>$request->number]);
         return redirect()->route('tables')->with('message',"تم الاضافة بنجاح ");
 }
 

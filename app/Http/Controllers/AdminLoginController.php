@@ -4,29 +4,47 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\chef;
+
 class AdminLoginController extends Controller
 {
-    protected $redirectTo = '/user/table/list';
 
 /**
- * @return Loginform view to chef 
+ * @return editForm view to Chef 
  */
-public function showLoginForm()
+public function edit()
 {
-    return view('auth.login');
+            
+    $User = chef::find(Auth::guard('chef')->user()->id);
+    return view('auth.edit', compact('User'));
+
+    // return new UserResource(User::find($id));
 }
 
-/**
- * @param Request   Illuminate\Http\Request
- * @return redirect To Home if chef email & password is True 
+
+    /**
+ * Display the specified resource.
+ *
+ * @param  int  $id
+ * @return \Illuminate\Http\Response
  */
-public function login(Request $request)
+public function update(Request $request)
 {
-    // dd($request->email);
-    if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
-        return redirect()->intended('tables');
-    }else{
-        return back()->with("status", "email or password is not correct");
-    }
+
+    $request->validate([
+        "name"      =>"required|max:20",
+        "email"     =>"required|max:100",
+        "password"     =>"max:20",
+        ]  );
+
+
+        $User = chef::where('id',Auth::guard('chef')->user()->id)->first();
+        $User->name=$request->name;
+        $User->email=$request->email;
+        if($request->password){$User->password=\Hash::make($request->password);}
+        $User->save();
+
+    return redirect()->back()->with('sendMessageSucc','تم الحفظ بنجاح ');  
 }
+
 }

@@ -32,7 +32,7 @@ class FoodsController extends Controller
  */
 public function foods(Request $request)
 {
-   $foods=foods::with('category')->where('chef_id',\Auth::user()->id)->get();
+   $foods=foods::with('category')->where('chef_id',\Auth::guard('chef')->user()->id)->get();
     return view('chef.Foods.index',compact('foods'));
 }
 
@@ -43,7 +43,7 @@ public function foods(Request $request)
 public function create_food()
 {
     $foods=foods::get();
-    $Categories=categories_chef::with('category')->where('chef_id',auth()->user()->id)->get();
+    $Categories=categories_chef::with('category')->where('chef_id',auth()->guard('chef')->user()->id)->get();
 
     return view('chef.Foods.create',compact('foods','Categories'));
 }
@@ -77,7 +77,7 @@ public function save_food(Request $request)
 
     $categories=foods::insert(['name'=>$request->name,'image'=>env('APP_URL').'/'."foods/".$name,
         'description'=>$request->description,'price'=>$request->price,
-        'category_id'=>$request->category,'chef_id'=>auth()->user()->id,'discount'=>$request->discount,'is_discount'=>$is_discount]);
+        'category_id'=>$request->category,'chef_id'=>auth()->guard('chef')->user()->id,'discount'=>$request->discount,'is_discount'=>$is_discount]);
 
         return redirect()->route('foods')->with('message',"تم الاضافة بنجاح ");
 }
@@ -130,7 +130,7 @@ public function update_food(Request $request,$id)
     $categories=foods::where('id',$id)->update([
     'name'=>$request->name,'image'=>$fullImageUrl,
     'description'=>$request->description,'price'=>$request->price,
-    'category_id'=>$request->category,'chef_id'=>auth()->user()->id,
+    'category_id'=>$request->category,'chef_id'=>auth()->guard('chef')->user()->id,
     'discount'=>$request->discount,'is_discount'=>$is_discount]);
 
 

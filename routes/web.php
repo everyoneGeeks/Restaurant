@@ -10,7 +10,6 @@ Route::get('/user/table/edit/{id}','TablesController@edit_table')->name('edit.ta
 Route::post('/user/table/update/{id}','TablesController@update_table')->name('update.table');
 Route::get('/user/table/delete/{id}','TablesController@delete_table')->name('delete.table');
 
-
 //Category
 Route::get('/user/category/list','CategoriesController@categories')->name('categories');
 Route::get('/user/category/create','CategoriesController@create_category')->name('add.category');
@@ -26,16 +25,26 @@ Route::post('/user/food/save','FoodsController@save_food')->name('save.food');
 Route::get('/user/food/edit/{id}','FoodsController@edit_food')->name('edit.food');
 Route::post('/user/food/update/{id}','FoodsController@update_food')->name('update.food');
 Route::get('/user/food/delete/{id}','FoodsController@delete_food')->name('delete.food');
-
-
-//logout 
+//Update chef Info
+Route::get('/user/show','AdminLoginController@edit')->name('chef.edit');
+Route::post('/user/update','AdminLoginController@update')->name('chef.update');
 
 });
-//Login)- 
-Route::get('login','chefLoginController@showLoginForm');
+//Login
+// login system chef
+
+
+
+
+
+Route::get('login','chefLoginController@showLoginForm')->middleware('guest:chef');
 Route::post('login','chefLoginController@login')->name('login');
 
 Route::get('/',function(){
     return view('welcome');
 });
-Route::get('logout',function (){Auth::logout();})->name('logout');
+
+Route::post('logout',function (){
+    Auth::guard('chef')->logout();
+    return redirect(route('login'));
+})->name('logout');

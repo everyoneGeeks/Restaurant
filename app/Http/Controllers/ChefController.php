@@ -13,7 +13,7 @@ class ChefController extends Controller
  */
 public function table(Request $request)
 {
-   $tables=Table::where('chef_id',Auth::user()->id)->get();
+   $tables=Table::where('chef_id',Auth::guard('chef')->user()->id)->get();
     return viwe('chef.dashboard.index',compact($tables));
 }
 

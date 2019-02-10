@@ -11,7 +11,7 @@
       <div class="container-fluid">
         <!-- begin mobile sidebar expand / collapse button -->
         <div class="navbar-header">
-          <a href="index.html" class="navbar-brand"><span class="navbar-logo"></span> the Restaurant </a>
+          <a href="#" class="navbar-brand"><span class="navbar-logo"></span> the Restaurant </a>
           <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -27,19 +27,14 @@
               <img src="/Images/admin.png" alt="" /> 
               <span class="hidden-xs">@yield('user')</span> <b class="caret"></b>
             </a>
-            @if(Auth::check())
+            @if(Auth::guard('chef')->check())
             <ul class="dropdown-menu animated fadeInLeft">
 
-            {{-- <li><a href="/user/show/{{Auth::user()->id}}">{{Auth::user()->name}}</a></li> --}}
-            <li><a href="/user/show/{{Auth::user()->id}}">الصفحة الشخصية</a></li>
+            <li><a href="/user/show">الصفحة الشخصية</a></li>
               <li class="divider"></li>
-              {{-- <li><a href="javascript:;">تسجيل الخروج</a></li> --}}
+               
               <li class="nav-item dropdown">
-                {{-- <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                    {{ Auth::User()->name }} <span class="caret"></span>
-                </a> --}}
-
-                {{-- <div class="dropdown-menu" aria-labelledby="navbarDropdown"> --}}
+                
                     <a class="dropdown-item" href="{{ route('logout') }}"
                        onclick="event.preventDefault();
                                      document.getElementById('logout-form').submit();">
@@ -49,7 +44,7 @@
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
                     </form>
-                {{-- </div> --}}
+               
             </li>
             </ul>
             @endif

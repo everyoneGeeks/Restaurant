@@ -32,7 +32,7 @@ class CategoriesController extends Controller
  */
 public function Categories(Request $request)
 {
-   $Categories=categories_chef::with('category')->where('chef_id',\Auth::user()->id)->get();
+   $Categories=categories_chef::with('category')->where('chef_id',\Auth::guard('chef')->user()->id)->get();
     return view('chef.Categories.index',compact('Categories'));
 }
 
@@ -59,7 +59,7 @@ public function save_category(Request $request)
         ];  
 
     $this->validate($request,$rules);
-        $categories=categories_chef::insert(['chef_id'=>auth()->user()->id,'category_id'=>$request->category]);
+        $categories=categories_chef::insert(['chef_id'=>auth()->guard('chef')->user()->id,'category_id'=>$request->category]);
         return redirect()->route('categories')->with('message',"تم الاضافة بنجاح ");
 }
 
