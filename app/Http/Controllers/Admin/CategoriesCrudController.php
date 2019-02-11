@@ -33,12 +33,14 @@ class CategoriesCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
 
-        // TODO: remove setFromDb() and manually define Fields and Columns
-        $this->crud->setFromDb();
-                  $this->crud->addField([
-                      'name' => 'icon',
-                      'type' => 'upload',
-                      'label' => "icon"]);  
+        $this->crud->addColumn(['name' => 'name', 'type' => 'text', 'label' => 'name']);
+        $this->crud->addColumn(['name' => 'icon', 'type' => 'image', 'label' => 'icon']);
+        $this->crud->addColumn(['name' => 'created_at', 'type' => 'date', 'label' => 'created_at']);
+
+        // Fields
+        $this->crud->addField(['name' => 'name', 'type' => 'text',  'label' => 'name']);
+        $this->crud->addField(['name' => 'icon', 'type' => 'image',  'label' => 'icon']);  
+        
         // add asterisk for fields that are required in CategoriesRequest
         $this->crud->setRequiredFields(StoreRequest::class, 'create');
         $this->crud->setRequiredFields(UpdateRequest::class, 'edit');
