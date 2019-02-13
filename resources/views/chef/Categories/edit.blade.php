@@ -26,8 +26,8 @@
                 @csrf
                 <fieldset>
                 <div class="row">
+
                     <div class="col-md-6">
-                        <div class="form-group {{ $errors->has('number') ? ' has-error' : '' }}">
                                 <div class="form-group {{ $errors->has('category') ? ' has-error' : '' }}">
                                         <label for="category">الاقسام المتاحة  </label>
                                         <select class="form-control js-example-basic-single" name="category">
@@ -43,10 +43,15 @@
                                         <span style="color:red;">{{ $errors->first('category') }}</span>
                                         @endif
                                     </div>
+                                    <div class="text-center">
+                                            <button type="submit" class="btn btn-sm btn-primary m-r-5"> حفظ </button>
+                                        </div>
                     </div><!--end col-md-6-->
+                    
+
                 </div><!--end row-->
 
-                <button type="submit" class="btn btn-sm btn-primary m-r-5"> حفظ </button>
+         
                 </fieldset>
             </form>
         </div>

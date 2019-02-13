@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 class ChefController extends Controller
 {
+
+
 /**
  * get all Chef Tables in App
  * @param Request   Illuminate\Http\Request

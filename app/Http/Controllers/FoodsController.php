@@ -122,7 +122,7 @@ public function update_food(Request $request,$id)
             $image->move($destinationPath, $name);
             $fullImageUrl=env('APP_URL').'/'."foods/".$name;
         }else{
-            $fullImageUrl=foods::where('id',$id)->frist()->image;
+            $fullImageUrl=foods::where('id',$id)->first()->image;
         }
 
     $this->validate($request,$rules);

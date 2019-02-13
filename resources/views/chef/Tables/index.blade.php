@@ -42,7 +42,7 @@
                     @foreach ($tables as $U)
                     <tr>
                     <td>{{$U->number}}</td>
-                      <td>{{ $U->created_at }}</td>
+                      <td>{{ $U->created_at->diffforhumans() }}</td>
                       <td><a href="{{route('edit.table',$U->id)}}" class="btn btn-success btn-xs"> تعديل </a></td>
                       <td><a href="{{route('delete.table',$U->id)}}" class="btn btn-danger btn-xs"> حذف </a></td>
                     </tr>
