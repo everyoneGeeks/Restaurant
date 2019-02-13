@@ -44,7 +44,7 @@
                     <tr>
                     <td>{{$U->category->name}}</td>
                       <td><img src="{{$U->category->icon}}"></td>
-                      <td>{{$U->created_at}}</td>
+                      <td>{{$U->category->created_at->diffforhumans()}}</td>
                       <td><a href="{{route('edit.category',$U->id)}}" class="btn btn-success btn-xs"> تعديل </a></td>
                       <td><a href="{{route('delete.category',$U->id)}}" class="btn btn-danger btn-xs"> حذف </a></td>
                     </tr>

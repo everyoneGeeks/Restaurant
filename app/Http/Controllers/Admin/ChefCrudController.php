@@ -45,8 +45,8 @@ class ChefCrudController extends CrudController
         // Fields
         $this->crud->addField(['name' => 'name', 'type' => 'text',  'label' => 'name']);
         $this->crud->addField(['name' => 'email', 'type' => 'text',  'label' => 'email']);
-        $this->crud->addField(['name' => 'password', 'type' => 'text',  'label' => 'password']);
-        $this->crud->addField(['name' => 'logo', 'type' => 'upload',  'label' => 'logo']);  
+        $this->crud->addField(['name' => 'password', 'type' => 'password',  'label' => 'password']);
+        $this->crud->addField(['name' => 'logo', 'type' => 'image',  'label' => 'logo']);  
         $this->crud->addField(['name' => 'color', 'type' => 'color',  'label' => 'color']); 
         
         // add asterisk for fields that are required in ChefRequest
@@ -56,7 +56,7 @@ class ChefCrudController extends CrudController
 
     public function store(StoreRequest $request)
     {
-        $this->request->request->set('apiToken', 'dddd');
+        $this->request->request->set('apiToken', str_random(64));
         //dd($this->request);
         // your additional operations before save here
         $redirect_location = parent::storeCrud($this->request);

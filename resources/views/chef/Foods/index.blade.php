@@ -46,7 +46,7 @@
                     @foreach ($foods as $U)
                     <tr>
                     <td>{{$U->name}}</td>
-                    <td><img src="{{$U->image}}"></td>
+                    <td><img width="200px" src="{{$U->image}}"></td>
                       <td>{{ $U->description }}</td>
                       <td>{{ $U->price }}</td>
                       <td>{{ $U->category->name }}</td>

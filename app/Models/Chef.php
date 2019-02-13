@@ -19,7 +19,7 @@ class Chef extends Model
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ['name','logo','color','created_at'];
+    protected $fillable = ['name','logo','color','created_at','apiToken','email','password'];
     // protected $hidden = [];
     // protected $dates = [];
 
@@ -80,4 +80,15 @@ class Chef extends Model
                 }
             
     }
+
+
+    public function setpasswordAttribute($value)
+    {
+
+                    $this->attributes['password'] = \Hash::make($value);
+            
+    }    
+
+ 
+   
 }

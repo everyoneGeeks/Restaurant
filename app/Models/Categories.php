@@ -70,9 +70,9 @@ class Categories extends Model
                 if (starts_with($value, 'data:image'))
                 {
                     // 0. Make the image
-                    $image = \Image::make($value)->encode('jpg', 90);
+                    $image = \Image::make($value)->encode('png', 90);
                     // 1. Generate a filename.
-                    $filename = md5($value.time()).'.jpg';
+                    $filename = md5($value.time()).'.png';
                     // 2. Store the image on disk.
                     \Storage::disk($disk)->put($destination_path.'/'.$filename, $image->stream());
                     // 3. Save the path to the database
