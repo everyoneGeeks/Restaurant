@@ -20,7 +20,6 @@ use App\chef;
 |  __  |/ _ \| '_ ` _ \ / _ \
 | |  | | (_) | | | | | |  __/
 |_|  |_|\___/|_| |_| |_|\___|   
-            
 */
 
 class HomeController extends Controller

@@ -1,5 +1,5 @@
 @extends ('layouts.master')
-@section('title', "الاطعمة")
+@section('title', "المخزن ")
 @section ('content')
 
 <div class="row">
@@ -20,7 +20,7 @@
 
 
             </div>
-            <h4 class="panel-title">الاطعمة</h4>
+            <h4 class="panel-title">المخزن</h4>
         </div>
         <div class="panel-body">
                 @if (session('message'))
@@ -32,27 +32,23 @@
             <table id="data-table" class="table table-striped table-bordered nowrap" width="100%" dir="rtl" >
                 <thead>
                     <tr>
+                      <th>الرقم</th>
                       <th>الاسم  </th>
-                      <th>الصورة </th>
-                      <th>الوصف </th>
-                      <th>السعر </th>
-                      <th>القسم </th>
-                      <th>الخصم </th>
-                      <th>تعديل </th>
-                      <th>حذف  </th>
+                      <th>الكمية   </th>
+                      <th>التاريخ  </th>
+                      <th>تعديل</th>
+                      <th>حذف</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($foods as $U)
+                    @foreach ($Kitchen as $U)
                     <tr>
-                    <td><a href="{{route('info.food',$U->id)}}">{{$U->name}}</a></td>
-                    <td><img width="200px" src="{{$U->image}}"></td>
-                      <td>{{ $U->description }}</td>
-                      <td>{{ $U->price }}</td>
-                      <td>{{ $U->category->name }}</td>
-                      <td>{{ $U->discount }}</td>
-                      <td><a href="{{route('edit.food',$U->id)}}" class="btn btn-success btn-xs"> تعديل </a></td>
-                      <td><a href="{{route('delete.food',$U->id)}}" class="btn btn-danger btn-xs"> حذف </a></td>
+                    <td>{{$U->id}}</td>
+                    <td>{{$U->name}}</td>
+                    <td>{{$U->amount}}</td>
+                      <td>{{ $U->created_at->diffforhumans() }}</td>
+                      <td><a href="{{route('edit.kitchen',$U->id)}}" class="btn btn-success btn-xs"> تعديل </a></td>
+                      <td><a href="{{route('delete.kitchen',$U->id)}}" class="btn btn-danger btn-xs"> حذف </a></td>
                     </tr>
                     @endforeach
                    
@@ -60,7 +56,7 @@
             </table>
             <div class="clearfix"></div>
             <div class="container" style="margin-top:25px">
-       <a href="{{route('add.food')}}" class="btn btn-success">اضافة وجبة  جديده </i>
+       <a href="{{route('add.kitchen')}}" class="btn btn-success">اضافة للمخزن  </i>
        </a>
        </div>
         </div>

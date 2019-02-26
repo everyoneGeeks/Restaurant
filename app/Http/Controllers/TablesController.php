@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\tables;
 use Auth;
+use Carbon\Carbon;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,7 @@ public function table(Request $request)
     return view('chef.Tables.index',compact('tables'));
 }
 
+
 /**
  * add New chef table in App
  * @return redirect to Tables add Form 
@@ -55,7 +57,7 @@ public function save_table(Request $request)
         ];  
 
     $this->validate($request,$rules);
-        $table=tables::insert(['chef_id'=>auth()->guard('chef')->user()->id,'number'=>$request->number]);
+        $table=tables::insert(['created_at'=>Carbon::now(),'chef_id'=>auth()->guard('chef')->user()->id,'number'=>$request->number]);
         return redirect()->route('tables')->with('message',"تم الاضافة بنجاح ");
 }
 

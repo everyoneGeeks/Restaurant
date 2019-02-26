@@ -22,6 +22,7 @@ public function table(Request $request)
 /**
  * add New chef table in App
  * @param Request   Illuminate\Http\Request
+ * @param Request int    Illuminate\Http\Request
  * @return redirect to Tables if add true
  */
 public function show_add_table(Request $request)

@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\foods;
 use App\categories;
 use App\categories_chef;
-
+use App\Kitchen;
+use Carbon\Carbon;
+use App\food_content;
 use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
@@ -14,15 +16,16 @@ use Illuminate\Http\Request;
 |  controller mange food sectionbb
 |
 */
+
 /**
   __                _ 
  / _|              | |
 | |_ ___   ___   __| |
 |  _/ _ \ / _ \ / _` |
 | || (_) | (_) | (_| |
-|_| \___/ \___/ \__,_|
-                      
+|_| \___/ \___/ \__,_|                    
 */
+
 class FoodsController extends Controller
 {
 /**
@@ -34,6 +37,18 @@ public function foods(Request $request)
 {
    $foods=foods::with('category')->where('chef_id',\Auth::guard('chef')->user()->id)->get();
     return view('chef.Foods.index',compact('foods'));
+}
+
+/**
+ * get Chef food info App
+ * @param Request   Illuminate\Http\Request
+ * @return redirect To food view 
+ */
+public function info_food(Request $request,$id)
+{
+   $foods=foods::where('id',$id)->with('category')->with('content')->where('chef_id',\Auth::guard('chef')->user()->id)->first();
+
+    return view('chef.Foods.info',compact('foods'));
 }
 
 /**
@@ -147,5 +162,137 @@ public function delete_food($id)
     $foods=foods::where('id',$id)->delete();
     return back()->with('message',"تم الحذف بنجاح ");
 }
+
+/**
+* form Food content
+* @param Request Illuminate\Http\Request
+* @param id  id food
+*/
+public function form_Food_content(){
+    return view('chef.kitchen.create');    
+
+}
+
+/**
+* show all Food content
+* @param Request Illuminate\Http\Request
+* @param id  id food
+*/
+public function show_Food_content(){
+$Kitchen=Kitchen::where('chef_id',auth()->guard('chef')->user()->id)->get();    
+return view('chef.kitchen.index',compact('Kitchen'));
+}
+
+
+/**
+* add Food content
+* @param Request Illuminate\Http\Request
+* @param id  id food
+*/
+public function add_Food_content(Request $request){
+    $rules = [
+        "name"   =>"required",
+        "amount"    =>"required",
+
+        ];  
+        $this->validate($request,$rules); 
+        $Kitchen=Kitchen::insert(['name'=>$request->name,
+        'amount'=>$request->amount,
+        'chef_id'=>auth()->guard('chef')->user()->id,'created_at'=>Carbon::now()]) ;
+        return back()->with('message',"تم الاضافة  بنجاح ");       
+
+}
+
+/**
+ * edit Food content
+ * @param Request Illuminate\Http\Request
+ * @param id  id food
+ */
+public function edit_Food_content(Request $request,$id){
+    $rules = [
+        "name"   =>"required",
+        "amount"    =>"required",
+
+        ];  
+        $this->validate($request,$rules); 
+        $Kitchen=Kitchen::where('id',$id)->update(['name'=>$request->name,
+        'amount'=>$request->amount]) ;
+
+        return back()->with('message',"تم التعديل  بنجاح ");       
+
+}
+
+/**
+ * form edit Food content
+ * @param Request Illuminate\Http\Request
+ * @param id  id food
+ */
+public function form_edit_Food_content($id){
+    $Kitchen=Kitchen::where('id',$id)->first(); 
+    return view('chef.kitchen.edit',compact('Kitchen'));    
+
+}
+
+/**
+ * edit Food content
+ * @param Request Illuminate\Http\Request
+ * @param id  id food
+ */
+public function delete_Food_content($id){
+
+        $Kitchen=Kitchen::where('id',$id)->delete();
+
+        return back()->with('message',"تم الحذف  بنجاح ");       
+
+}
+
+/**
+ * delete kitchen food content
+ * @param Request Illuminate\Http\Request
+ * @param id  id food
+ */
+public function delete_kitchen_food(Request $request,$id){
+    $food_content=food_content::where('id',$id)->delete();
+
+    return back()->with('message',"تم الحذف  بنجاح ");     
+}
+
+
+/**
+ * add_form_kitchen_food
+ * @param Request Illuminate\Http\Request
+ * @param id  id food
+ */
+public function add_form_kitchen_food($id){
+    $Kitchen=Kitchen::get();
+$id=$id;
+    return view('chef.kitchen.addContent',compact('Kitchen','id'));     
+}
+
+
+
+/**
+ * add_kitchen_food 
+ * @param Request Illuminate\Http\Request
+ * @param id  id food
+ */
+public function add_kitchen_food(Request $request,$id){
+    $rules = [
+        "name"   =>"required|exists:Kitchen,id",
+        "amount"    =>"required",
+        ];  
+        
+        $this->validate($request,$rules); 
+        $Kitchen=food_content::where('id',$id)->insert([
+        'kitchen_id'=>$request->name,
+        'amount'=>$request->amount,
+        'food_id'=>$id,
+        'created_at'=>Carbon::now()
+        ]);
+
+        return back()->with('message',"تم الاضافة  بنجاح ");       
+
+}
+
 
 }

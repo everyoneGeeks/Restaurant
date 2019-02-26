@@ -42,6 +42,13 @@
             </a>
           </li>  
 
+          <li class="{{ Request::is('/user/kitchen*') ? 'active ' : '' }}">
+            <a href="{{route('kitchen')}}">
+                <i class="fas fa-utensils"></i>
+                <span>المخزن   </span>
+              </a>
+            </li>  
+
       <!-- begin sidebar minify button -->
       <li>
         <a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify">

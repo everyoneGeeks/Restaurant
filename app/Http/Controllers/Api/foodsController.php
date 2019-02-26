@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\food;
 use App\foods;
 use App\chef;
+
 /*
 |--------------------------------------------------------------------------
 | foodsController
@@ -14,15 +15,16 @@ use App\chef;
 | this api will get all chef food
 |
 */
+
 /**
   __                _ 
  / _|              | |
 | |_ ___   ___   __| |
 |  _/ _ \ / _ \ / _` |
 | || (_) | (_) | (_| |
-|_| \___/ \___/ \__,_|
-                      
+|_| \___/ \___/ \__,_|                      
  */
+
 class foodsController extends Controller
 {
 /**
